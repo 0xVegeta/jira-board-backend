@@ -14,9 +14,8 @@ boardRouter.route("/:id").
   delete(boardControllers.deleteBoard)
 
 
+boardRouter.use('/:boardId/columns', require('./boardColumn'))
+// boardRouter.use('/:boardId/items', require('./boardItems'))
+
+
 module.exports = boardRouter
-
-  
-
-// boardRouter.use('/:id/columns', require('./boardColumn'))
-// boardRouter.use('/:id/items', require('./boardItems'))

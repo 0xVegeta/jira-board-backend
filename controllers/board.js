@@ -53,7 +53,7 @@ const deleteBoard = async (req, res) => {
 			return res.status(400).json({ error: "Invalid board ID" });
 		}
 
-    await Column.deleteMany({ board: Number(boardId) });
+    await Column.deleteMany({ board: boardId });
 		const deletedBoard = await Board.findByIdAndDelete(boardId);
 
 		if (!deletedBoard) {
@@ -70,17 +70,15 @@ const deleteBoard = async (req, res) => {
 const fetchBoard = async (req, res) => {
 	try {
 		const boardId = req.params.id;
-
-		console.log("check", typeof boardId);
-     const board = await Board.find({_id: boardId});
+    const board = await Board.find({_id: boardId});
 		if (!boardId) {
 			return res.status(404).json({ error: "Invalid board ID" });
 		}
-
-		return res.status(200).json({ board });
+    const columns = await Column.find({ board: boardId });
+		return res.status(200).json({ board, columns });
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json({ error: "Error updating the board" });
+		return res.status(500).json({ error: "Error fetching the board" });
 	}
 };
 

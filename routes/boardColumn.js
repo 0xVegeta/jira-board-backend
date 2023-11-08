@@ -1,8 +1,11 @@
 const express = require('express')
 const columnsRouter = express.Router()
+const {addColumn, deleteColumn, updateColumn} = require('../controllers/column')
 
 
-columnsRouter.route('/').
-  post().
-  get().
-  patch()
+columnsRouter.post('/', addColumn)
+
+columnsRouter.route('/:columnId').delete(deleteColumn).patch(updateColumn)
+
+
+module.exports = columnsRouter
