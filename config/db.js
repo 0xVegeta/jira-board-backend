@@ -3,7 +3,6 @@ const colors = require("colors");
 
 const connectDB = async () => {
 	try {
-		console.log('check=======', process.env.MONGO_URI);
 		const connection = await mongoose.connect(process.env.MONGO_URI, {
 
 		});
