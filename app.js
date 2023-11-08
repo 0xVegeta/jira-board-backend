@@ -4,9 +4,10 @@ const dotenv = require("dotenv");
 dotenv.config({ path: `.env` });
 const { connectDB } = require("./config/db");
 const apiRouters = require('./routes/api')
-
+const cors = require("cors");
 connectDB();
 const expressApp = express();
+expressApp.use(cors());
 expressApp.use(bodyParser.json());
 expressApp.get("/", (req, res) => {
 	res.json({ message: "Yayy you're at JIRA board" });
